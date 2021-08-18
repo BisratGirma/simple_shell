@@ -9,29 +9,13 @@
  */
 int main()
 {
-	int ret, count;
-	char argv[1024];
-	char *comb;
+	char *argv = malloc(sizeof(char));
+
+
+	printf("\n$ ");
+	reader(argv);
 
 	
-	printf("\n$ ");
-	count = reader(argv);
-
-	if (count == 0)
-		printf("\n$ ");
-	comb = strcat("/bin/", argv);
-	ret = fork();
-	if (ret == 0)
-	{
-		if (execve(comb , &argv, NULL) == -1)
-		{
-			printf("./shell: No such directory");
-		}
-	}
-	else
-	{
-		wait(NULL);
-		printf("\n$ ");
-	}
+	free(argv);
 	return (0);
 }
