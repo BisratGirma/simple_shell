@@ -9,13 +9,13 @@
  */
 int main()
 {
-	char *argv = malloc(sizeof(char));
-
+	char *line = NULL;
+	char *argv[MAX_WORD];
 
 	printf("\n$ ");
-	reader(argv);
+	while(1)
+		reader(line, argv);
 
 	
-	free(argv);
 	return (0);
 }
