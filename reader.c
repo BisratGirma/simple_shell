@@ -20,8 +20,6 @@ int reader(char *line, char *argv[])
 
 	line[i] = '\0';
 
-	printf("%s", line);
-
 	i = 0;
 	tmp = strtok(line, &space);
 
@@ -48,12 +46,12 @@ int reader(char *line, char *argv[])
  */
 void executecom(char *argv[])
 {
-	char *comb, *bin = "/bin/";
-
-	comb = _strcat(bin, argv[0]);
 	
-	printf("%s", comb);
-/*	ret = fork();
+	int ret;
+	char bin[50] = "/bin/", *comb;
+	
+	comb = _strcat(bin, argv[0]);
+	ret = fork();
 	if (ret == 0)
 	{
 		if (execve(comb, argv, NULL) == -1)
@@ -66,5 +64,4 @@ void executecom(char *argv[])
 		wait(NULL);
 		printf("\n$ ");
 	}
-	*/
 }
