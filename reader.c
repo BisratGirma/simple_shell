@@ -48,15 +48,16 @@ void executecom(char *argv[])
 {
 	
 	int ret;
-	char bin[50] = "/bin/", *comb;
-	
-	comb = _strcat(bin, argv[0]);
+	char temp[50] = "/bin/", *comb,
+		*env_args[] = {(char *) "PATH=/bin", 0};
+
+	comb = _strcat(temp, argv[0]);
 	ret = fork();
 	if (ret == 0)
 	{
-		if (execve(comb, argv, NULL) == -1)
+		if (execve(comb, argv, env_args) == -1)
 		{
-			printf("./shell: No such directory");
+			printf("./shell: No such directory\n");
 		}
 	}
 	else
