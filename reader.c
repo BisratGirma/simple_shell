@@ -10,7 +10,8 @@ int reader(char *line, char *argv[])
 {
 	int i = 0;
 	size_t n;
-	const char *space = " ";
+	char *tmp;
+	const char space = ' ';
 
 	getline(&line, &n, stdin);
 	
@@ -22,15 +23,16 @@ int reader(char *line, char *argv[])
 	printf("%s", line);
 
 	i = 0;
-	argv[i] = strtok(line, ' ');
+	tmp = strtok(line, &space);
 
-	if(argv[i] == NULL)
+	if(tmp == NULL)
 	      return (1);
 
-	while(argv[i] != '\0')
+	while(tmp != NULL)
 	{
+		argv[i] = tmp;
+		tmp = strtok(NULL, &space);
 		i++;
-		argv[i] = strtok(line, space);
 	}
 
 	executecom(argv);
@@ -46,13 +48,15 @@ int reader(char *line, char *argv[])
  */
 void executecom(char *argv[])
 {
-	int ret;
-	char *com = "/bin/" + argv[0];
+	char *comb, *bin = "/bin/";
+
+	comb = _strcat(bin, argv[0]);
 	
-	ret = fork();
+	printf("%s", comb);
+/*	ret = fork();
 	if (ret == 0)
 	{
-		if (execve(com , argv, NULL) == -1)
+		if (execve(comb, argv, NULL) == -1)
 		{
 			printf("./shell: No such directory");
 		}
@@ -62,6 +66,5 @@ void executecom(char *argv[])
 		wait(NULL);
 		printf("\n$ ");
 	}
-
-	return (1);
+	*/
 }
