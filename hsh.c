@@ -7,10 +7,15 @@
  *
  * Return: 0 on exit.
  */
-int main(int argc, char *av[])
+int main(int argc, char *av[], char *env[])
 {
-	int count = 1;
+	int i = 0, count = 1;
 
+	while(env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 	(void)argc;
 	while(reader(count, av))
 	{
