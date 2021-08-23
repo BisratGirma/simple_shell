@@ -7,15 +7,15 @@
  *
  * Return: 0 on exit.
  */
-int main()
+int main(int argc, char *av[])
 {
-	char *line = NULL;
-	char *argv[MAX_WORD];
+	int count = 1;
 
-	printf("\n$ ");
-	while(1)
-		reader(line, argv);
-
+	(void)argc;
+	while(reader(count, av))
+	{
+		count++;
+	}
 	
 	return (0);
 }

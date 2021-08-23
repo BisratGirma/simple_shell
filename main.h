@@ -9,8 +9,11 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-int reader(char *line, char *argv[]);
-void executecom(char *argv[]);
+int reader(int count, char *native_av[]);
+void executecom(char *argv[], int count,
+	       	char *native_av[], int i);
 char *_strcat(char *dest, char *src);
+int _strcmp(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
 
 #endif
