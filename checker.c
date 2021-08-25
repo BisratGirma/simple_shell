@@ -1,21 +1,20 @@
 #include "main.h"
 
-char *setbuff(char *path, char *argv, char *buffer)
+char *setbuff(char *path, char *argv, int sum)
 {
 	int i, j;
+	char buffer[sum];
 
 	for(i = 0; path[i] != '\0'; i++)
 		buffer[i] = path[i];
 
 	buffer[i] = '/';
 
-	
 	for(j = 0; argv[i] != '\0'; j++)
 	{
 		buffer[i] = argv[j];
 		i++;
 	}
-	buffer[i] = '\0';
 	return (buffer);
 }
 /*	}*
@@ -26,20 +25,22 @@ char *setbuff(char *path, char *argv, char *buffer)
  */
 int commands(char *argv, char *pathlist[])
 {
-	int i;
+	int i, sum;
 	char *buffer;
 
-	buffer = malloc(strlen(pathlist[i]) + sizeof(char) + strlen(argv) + 1);
+	
 	for(i = 0; pathlist[i] != NULL; i++)
 	{
-		setbuff(pathlist[i], argv, buffer);
+		sum = sizeof(pathlist[i]) + sizeof(argv);
+		buffer = setbuff(pathlist[i], argv, sum);
 		printf("%s\n", buffer); 
-	
+
 		if(access(buffer, X_OK) == 0)
 		{
 			free(buffer);
 			return (i);
 		}
+	memset(buffer, 0, sizeof(buffer));
 	}
 	free(buffer);
 	return (-1);
