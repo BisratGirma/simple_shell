@@ -1,47 +1,18 @@
-#include "main.h"
-
-char *setbuff(char *path, char *argv, int sum)
-{
-	int i, j;
-	char buffer[sum];
-
-	for(i = 0; path[i] != '\0'; i++)
-		buffer[i] = path[i];
-
-	buffer[i] = '/';
-
-	for(j = 0; argv[i] != '\0'; j++)
-	{
-		buffer[i] = argv[j];
-		i++;
-	}
-	return (buffer);
-}
-/*	}*
- * commands - check for built ins.
- * @env: a string.
- *
- * Return: 1 on succuss.
+#include "shell.h"
+/**
+ *checker- checks to see weather its a built in function
+ *@cmd: tokenized user input
+ *@buf: line drived fromgetline function
+ *Return: 1 if cmd excuted 0 if cmd is not executed
  */
-int commands(char *argv, char *pathlist[])
+int checker(char **cmd, char *buf, char *envp[])
 {
-	int i, sum;
-	char *buffer;
-
-	
-	for(i = 0; pathlist[i] != NULL; i++)
+	if (handle_builtin(cmd, buf, envp))
+		return (1);
+	else if (**cmd == '/')
 	{
-		sum = sizeof(pathlist[i]) + sizeof(argv);
-		buffer = setbuff(pathlist[i], argv, sum);
-		printf("%s\n", buffer); 
-
-		if(access(buffer, X_OK) == 0)
-		{
-			free(buffer);
-			return (i);
-		}
-	memset(buffer, 0, sizeof(buffer));
+		execution(cmd[0], cmd);
+		return (1);
 	}
-	free(buffer);
-	return (-1);
+	return (0);
 }
