@@ -9,15 +9,12 @@
  */
 int main(int argc, char *av[], char *env[])
 {
-	int i = 0, count = 1;
-
-	while(env[i] != NULL)
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+	int count = 1;
+	char **pathlist;
+	
+	pathlist = getpathlist();
 	(void)argc;
-	while(reader(count, av))
+	while(reader(count, av, env, pathlist))
 	{
 		count++;
 	}
