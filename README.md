@@ -70,6 +70,7 @@ $ echo "qwerty" | ./././hsh
 ./././hsh: 1: qwerty: not found
 $
 
+
 List of allowed functions and system calls
 access (man 2 access)
 chdir (man 2 chdir)
